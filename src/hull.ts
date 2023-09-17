@@ -34,19 +34,9 @@ function createOnePointHull(point: CoordinatePair, hullPadding: number) {
 	];
 
 	return `
-		M ${p1.join(" ")}
-		A ${[
-			hullPadding,
-			hullPadding,
-			"0,0,0",
-			p2,
-		].join(",")}
-		A ${[
-			hullPadding,
-			hullPadding,
-			"0,0,0",
-			p1,
-		].join(",")}
+M ${p1.join(" ")}
+A ${[hullPadding, hullPadding, "0,0,0", p2].join(",")}
+A ${[hullPadding, hullPadding, "0,0,0", p1].join(",")}
 	`.trim();
 }
 
@@ -62,8 +52,7 @@ function createTwoPointHull([
 	const controlDelta = scaleVector([
 		-vector[1],
 		vector[0],
-	],
-		tangentHalfLength);
+	], tangentHalfLength);
 	const inverseControlDelta = scaleVector(controlDelta, -1);
 
 	const endPoints = [
@@ -77,36 +66,22 @@ function createTwoPointHull([
 	];
 
 	return `
-		M ${endPoints[0].join(" ")}
-		C ${[
-			controlPoints[0],
-			controlPoints[1],
-			endPoints[1],
-		].join(",")}
-		S ${[
-			controlPoints[2],
-			endPoints[0],
-		].join(",")}
-		Z
+M ${endPoints[0].join(" ")}
+C ${[controlPoints[0], controlPoints[1], endPoints[1]].join(",")}
+S ${[controlPoints[2], endPoints[0]].join(",")}
+Z
 	`.trim();
 }
 
 function createVector(
-	[
-		x1,
-		y1]:
-		CoordinatePair, [
-			x2,
-			y2]:
-		CoordinatePair, length = 1,
+	[x1, y1]: CoordinatePair,
+	[x2, y2]: CoordinatePair,
+	length = 1,
 ): CoordinatePair {
 	const [
 		x,
 		y,
-	] = [
-			x2 - x1,
-			y2 - y1,
-		];
+	] = [x2 - x1, y2 - y1];
 	const magnitude = getMagnitude([
 		x,
 		y,
@@ -130,13 +105,7 @@ function scaleVector([
 	];
 }
 
-function sumVectors([
-	x1,
-	y1]:
-	CoordinatePair, [
-		x2,
-		y2]:
-		CoordinatePair): CoordinatePair {
+function sumVectors([x1, y1]: CoordinatePair, [x2, y2]: CoordinatePair): CoordinatePair {
 	return [
 		x1 + x2,
 		y1 + y2,
@@ -159,17 +128,12 @@ function createPolyHull(points: CoordinatePair[], hullPadding: number) {
 		))
 		.map(expandPoint(hullPadding));
 
-	return line()
+	const createLine = line()
 		.curve(curveCatmullRomClosed)
-		.x(([
-			x,
-			y,
-		]) => x)
-		.y(([
-			x,
-			y,
-		]) => y)
-		(hullPoints) || "";
+		.x(([x]) => x)
+		.y(([_, y]) => y);
+
+	return createLine(hullPoints) || "";
 }
 
 function addVectorToPoint(

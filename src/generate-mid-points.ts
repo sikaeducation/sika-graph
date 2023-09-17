@@ -1,5 +1,5 @@
 import { max, min } from "d3";
-import { Coordinate, Link, Node } from "../types";
+import { Coordinate, Link, Node } from "./types";
 
 export function getLinkLine({ source, target }: Link) {
 	const segmentCount = getSegmentCount(4, { source: source, target: target });
@@ -18,7 +18,8 @@ export function getLinkLine({ source, target }: Link) {
 	];
 }
 
-export function getDistance({ x: x1 = 0, y: y1 = 0 }: Coordinate, { x: x2 = 0, y: y2 = 0 }: Coordinate) {
+export function getDistance({ x: x1 = 0, y: y1 = 0 }: Coordinate,
+	{ x: x2 = 0, y: y2 = 0 }: Coordinate) {
 	const positionDifferential = {
 		x: x1 > x2 ? x1 - x2 : x2 - x1,
 		y: y1 > y2 ? y1 - y2 : y2 - y1,
@@ -42,11 +43,11 @@ export function centerToRadius(radius: number, { source, target }: Link) {
 
 	return {
 		source: Object.assign(source, {
-			x: source.x! + cosine,
-			y: source.y! + sine,
-		}), target: Object.assign({
-			x: target.x! - cosine,
-			y: target.y! - sine,
+			x: source.x ? source.x + cosine : null,
+			y: source.y ? source.y + sine : null,
+		}), target: Object.assign(target, {
+			x: target.x ? target.x - cosine : null,
+			y: target.y ? target.y - sine : null,
 		}),
 	};
 }

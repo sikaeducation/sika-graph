@@ -1,5 +1,5 @@
 import { Simulation } from "d3";
-import { Node, RawLink, Group, Coordinate } from "../../types";
+import { Node, RawLink, Group, Coordinate } from "../types";
 
 const alphaCutoff = 0.3;
 const attraction = 1 - 0.5;
@@ -7,10 +7,13 @@ const cutoffTaperRate = 1.1;
 const cutoffDistance = 27; // Ignore nodes closer than this
 
 // Moves each node closer to the center of its group
-export default function attractGroups(simulation: Simulation<Node, RawLink>, groups: Group[]) {
+export default function attractGroups(simulation: Simulation<Node, RawLink>,
+	groups: Group[]) {
 	const nodes = simulation.nodes();
 	const alpha = simulation.alpha();
-	const groupCenters = groups.reduce<Record<string, { x: number, y: number }>>((centers, group) => {
+	const groupCenters = groups.reduce<
+		Record<string, Coordinate>
+	>((centers, group) => {
 		centers[group.id] = {
 			x: group.center[0],
 			y: group.center[1],
