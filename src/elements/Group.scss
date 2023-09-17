@@ -1,0 +1,20 @@
+@use "../colors";
+
+.Group {
+	opacity: 1;
+	&.inactive {
+		path {
+			stroke-width: 0.1px;
+			stroke: colors.$grey-9;
+			fill: transparentize($color: colors.$grey-9, $amount: 0.9);
+		}
+		.group-label {
+			fill: colors.$grey-9;
+		}
+	}
+
+	.group-label {
+		font-size: 0.2em;
+		stroke-width: 1px;
+	}
+}

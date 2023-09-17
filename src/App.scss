@@ -1,0 +1,13 @@
+@use "./colors.scss";
+
+.App {
+	.bounds {
+		transition: transform 1s;
+	}
+
+	#container {
+		border: 1px solid colors.$failure-5;
+		overflow: hidden;
+		position: relative;
+	}
+}

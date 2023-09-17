@@ -1,0 +1,29 @@
+@use "../colors.scss";
+
+@keyframes blink {
+	from {
+		opacity: 0;
+	}
+
+	20% {
+		opacity: 1;
+	}
+
+	80% {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+#arrow {
+	path {
+		fill: colors.$grey-7;
+		stroke-width: 0.1px;
+		stroke: colors.$primary-7 !important;
+		font-size: 0.1em;
+		animation: blink 1.5s infinite;
+	}
+}
