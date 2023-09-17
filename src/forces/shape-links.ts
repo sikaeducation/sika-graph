@@ -1,5 +1,5 @@
 import { forceManyBody, forceCollide, Simulation, ForceLink } from "d3";
-import { HydratedLink, Link, Node, RawNode } from "../../types";
+import { HydratedLink, Link, Node, RawNode } from "../types";
 
 // Normal state after alpha cutoff
 const alphaCutoff = 0.3;

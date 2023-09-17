@@ -1,5 +1,5 @@
 import { line, curveCatmullRomClosed, polygonHull } from "d3";
-import { CoordinatePair, Vector } from "./types";
+import { CoordinatePair, Vector } from "../types";
 
 const hullPadding = 5;
 

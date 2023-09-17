@@ -1,5 +1,4 @@
 import { Simulation } from "d3";
-import { clampToInteger } from "./math";
 import { Node, Link } from "../types";
 
 export default function constrainNodes(simulation: Simulation<Node, Link>): void {
@@ -14,4 +13,11 @@ export default function constrainNodes(simulation: Simulation<Node, Link>): void
 			node.y, -boundary, boundary,
 		);
 	});
+}
+
+export function clampToInteger(
+	value: number, lowerBound: number, upperBound: number,
+) {
+	return Math.round(Math.max(Math.min(value, upperBound),
+		lowerBound));
 }

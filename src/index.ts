@@ -1,6 +1,6 @@
 import { RawLink, RawNode, RawGroup } from "./types";
-import addCoordinatesToGroup from "./utilities/add-coordinates-to-group";
-import constrainNodes from "./utilities/constrain-nodes";
+import addCoordinatesToGroup from "./graph/add-coordinates-to-group";
+import constrainNodes from "./graph/constrain-nodes";
 import attractGroups from "./forces/attract-groups";
 import shapeLinks from "./forces/shape-links";
 import options from "./options";
