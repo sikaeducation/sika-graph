@@ -1,5 +1,5 @@
 import { line, curveCatmullRomClosed, polygonHull } from "d3";
-import { CoordinatePair, Vector } from "../types";
+import { CoordinatePair, Vector } from "./types";
 
 const hullPadding = 5;
 
@@ -34,26 +34,26 @@ function createOnePointHull(point: CoordinatePair, hullPadding: number) {
 	];
 
 	return `
-		M ${p1}
+		M ${p1.join(" ")}
 		A ${[
-		hullPadding,
-		hullPadding,
-		"0,0,0",
-		p2,
-	].join(",")}
+			hullPadding,
+			hullPadding,
+			"0,0,0",
+			p2,
+		].join(",")}
 		A ${[
-		hullPadding,
-		hullPadding,
-		"0,0,0",
-		p1,
-	].join(",")}
+			hullPadding,
+			hullPadding,
+			"0,0,0",
+			p1,
+		].join(",")}
 	`.trim();
 }
 
 function createTwoPointHull([
 	p1,
 	p2]: CoordinatePair[
-], hullPadding: number) {
+	], hullPadding: number) {
 	const vector = createVector(
 		p1, p2, hullPadding,
 	);
@@ -63,7 +63,7 @@ function createTwoPointHull([
 		-vector[1],
 		vector[0],
 	],
-	tangentHalfLength);
+		tangentHalfLength);
 	const inverseControlDelta = scaleVector(controlDelta, -1);
 
 	const endPoints = [
@@ -77,16 +77,16 @@ function createTwoPointHull([
 	];
 
 	return `
-		M ${endPoints[0]}
+		M ${endPoints[0].join(" ")}
 		C ${[
-		controlPoints[0],
-		controlPoints[1],
-		endPoints[1],
-	].join(",")}
+			controlPoints[0],
+			controlPoints[1],
+			endPoints[1],
+		].join(",")}
 		S ${[
-		controlPoints[2],
-		endPoints[0],
-	].join(",")}
+			controlPoints[2],
+			endPoints[0],
+		].join(",")}
 		Z
 	`.trim();
 }
@@ -95,18 +95,18 @@ function createVector(
 	[
 		x1,
 		y1]:
-CoordinatePair, [
-		x2,
-		y2]:
-CoordinatePair, length = 1,
+		CoordinatePair, [
+			x2,
+			y2]:
+		CoordinatePair, length = 1,
 ): CoordinatePair {
 	const [
 		x,
 		y,
 	] = [
-		x2 - x1,
-		y2 - y1,
-	];
+			x2 - x1,
+			y2 - y1,
+		];
 	const magnitude = getMagnitude([
 		x,
 		y,
@@ -123,7 +123,7 @@ CoordinatePair, length = 1,
 function scaleVector([
 	x,
 	y]:
-CoordinatePair, scale: number): CoordinatePair {
+	CoordinatePair, scale: number): CoordinatePair {
 	return [
 		scale * x,
 		scale * y,
@@ -133,10 +133,10 @@ CoordinatePair, scale: number): CoordinatePair {
 function sumVectors([
 	x1,
 	y1]:
-CoordinatePair, [
-	x2,
-	y2]:
-CoordinatePair): CoordinatePair {
+	CoordinatePair, [
+		x2,
+		y2]:
+		CoordinatePair): CoordinatePair {
 	return [
 		x1 + x2,
 		y1 + y2,
@@ -146,7 +146,7 @@ CoordinatePair): CoordinatePair {
 function getMagnitude([
 	x,
 	y]:
-CoordinatePair, length: number) {
+	CoordinatePair, length: number) {
 	return length / Math.sqrt(x ** 2 + y ** 2);
 }
 
