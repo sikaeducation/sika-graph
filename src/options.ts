@@ -1,5 +1,3 @@
-// Make links loose at the beginning with groups strong, then flip
-
 const options = {
 	simulation: {
 		tickCount: 300,
@@ -11,11 +9,11 @@ const options = {
 			y: 0,
 		},
 		charge: { // Attraction, -100 is repel, 100 is stacked
-			initial: -100,
+			initial: -90,
 			final: -30,
 		},
 		collision: {
-			initial: 0,
+			initial: 30,
 			final: 0,
 		},
 		link: { // Nodes pushed together or pulled apart
