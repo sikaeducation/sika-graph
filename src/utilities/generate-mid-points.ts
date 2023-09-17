@@ -1,5 +1,5 @@
 import { max, min } from "d3";
-import { Coordinate, Link, Node } from "./types";
+import { Coordinate, Link, Node } from "../types";
 
 export function getLinkLine({ source, target }: Link) {
 	const segmentCount = getSegmentCount(4, { source: source, target: target });

@@ -1,9 +1,9 @@
-import addCoordinatesToGroup from "./add-coordinates-to-group";
+import { RawLink, RawNode, RawGroup } from "./types";
+import addCoordinatesToGroup from "./utilities/add-coordinates-to-group";
+import constrainNodes from "./utilities/constrain-nodes";
 import attractGroups from "./forces/attract-groups";
 import shapeLinks from "./forces/shape-links";
-import { RawLink, RawNode, RawGroup } from "./types";
 import options from "./options";
-import constrainNodes from "./constrain-nodes";
 import { getSimulation } from "./simulation";
 const {
 	simulation: {

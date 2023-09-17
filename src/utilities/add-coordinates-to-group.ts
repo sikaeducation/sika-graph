@@ -1,5 +1,5 @@
 import { Simulation } from "d3";
-import { Node, Group, RawGroup, CoordinatePair, Coordinate, Link } from "./types";
+import { Node, Group, RawGroup, CoordinatePair, Coordinate, Link } from "../types";
 
 export default function addCoordinatesToGroup(simulation: Simulation<Node, Link>,
 	groups: RawGroup[]): Group[] {

@@ -1,6 +1,6 @@
 import { Simulation } from "d3";
-import { clampToInteger } from "./utilities";
-import { Node, Link } from "./types";
+import { clampToInteger } from "./math";
+import { Node, Link } from "../types";
 
 export default function constrainNodes(simulation: Simulation<Node, Link>): void {
 	const boundary = 60;

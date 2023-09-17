@@ -3,7 +3,7 @@ import {
 } from "d3";
 import createLinkForces from "./forces/links";
 import { Node, RawLink, Link, RawNode } from "./types";
-import { deepClone, getUnique } from "./utilities";
+import { deepClone, getUnique } from "./utilities/math";
 import options from "./options";
 const {
 	forces: {
