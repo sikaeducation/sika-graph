@@ -1,6 +1,6 @@
 # Sika Graph
 
-Given nodes, links, groups, and an optional filter, return the plottable graph data for a Sika Graph.
+Given nodes, links, groups, an optional options object, and an optional filter, return the plottable graph data for a Sika Graph. The filter needs to be a part of this (instead of the data being passed in) to prevent the graph thrashing when all of the plot points for the data change.
 
 ## Installation
 
@@ -18,8 +18,7 @@ const nodes = [{
 	"group": "quality",
 	"critical": true,
 	"complete": true,
-},
-{
+},{
 	"id": "Naming",
 	"group": "quality",
 	"critical": false,
@@ -35,26 +34,26 @@ const groups = [{
 	"background-color": "hsla(120, 50%, 50%, 0.1)",
 	"foreground-color": "hsla(120, 50%, 50%, 0.4)",
 }];
+const options = {
+};
 const currentFilter = "all";
 const { simulation, groups } = runSimulation({ nodes, links, groups, currentFilter });
 
 /*
 // Simulation
 {
-	groups: [
-		{
-			"active": true,
-			"background-color": "hsla(120, 50%, 50%, 0.1)",
-			"center": [ 0, -0.5 ],
-			"foreground-color": "hsla(120, 50%, 50%, 0.4)",
-			"id": "quality",
-			"label": "Quality Concepts",
-			"points": [
-				[15, -5],
-				[-15, 4]
-			],
-		},
-	],
+	groups: [{
+		"active": true,
+		"background-color": "hsla(120, 50%, 50%, 0.1)",
+		"center": [ 0, -0.5 ],
+		"foreground-color": "hsla(120, 50%, 50%, 0.4)",
+		"id": "quality",
+		"label": "Quality Concepts",
+		"points": [
+			[15, -5],
+			[-15, 4]
+		],
+	}],
 	nodes: [{
     "complete": true,
     "critical": true,
