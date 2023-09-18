@@ -10,8 +10,8 @@
 		"lint": "eslint --fix .",
 		"test": "vitest"
 	},
-	"main": "dist/src/index.js",
-	"types": "dist/src/index.d.ts",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"devDependencies": {
 		"@sikaeducation/eslint-config": "^2.0.18",
 		"@types/d3": "^7.4.0",
