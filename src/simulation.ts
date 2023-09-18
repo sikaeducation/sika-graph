@@ -5,7 +5,6 @@ import {
 import createLinkForces from "./forces/links";
 import { Node, RawLink, Link, RawNode } from "./types";
 import options from "./options";
-import { log } from "console";
 const {
 	forces: {
 		positional: positionalForce,
@@ -46,15 +45,11 @@ export function createSimulation(
 function getNormalizedLinks(
 	links: RawLink[], nodes: RawNode[], currentFilter = "",
 ) {
-	log(
-		"3n0", nodes, currentFilter,
-	);
 	const currentNodeIds = nodes
 		.filter((node) => (
 			currentFilter === "all"
 			|| node.group === currentFilter
 		)).map(({ id }) => id);
-	log("3n", currentNodeIds);
 
 	return currentFilter === "all"
 		? cloneDeep(links)
