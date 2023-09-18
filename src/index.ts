@@ -41,7 +41,7 @@ export function runSimulation({
 	} while (count > 0);
 
 	return {
-		simulation: simulation,
+		nodes: simulation.nodes(),
 		groups,
 	};
 }

@@ -25,8 +25,25 @@ it("runs a simulation with 2 linked nodes", () => {
 		"foreground-color": "hsla(120, 50%, 50%, 0.4)",
 	}];
 	const currentFilter = "all";
-	const { simulation } = runSimulation({ nodes, links, groups, currentFilter });
-	expect(simulation.nodes()).toMatchObject([{
+	const {
+		nodes: graphNodes,
+		groups: graphGroups,
+	} = runSimulation({ nodes, links, groups, currentFilter });
+	expect(graphGroups).toMatchObject([
+		{
+			"active": true,
+			"background-color": "hsla(120, 50%, 50%, 0.1)",
+			"center": [0, -0.5],
+			"foreground-color": "hsla(120, 50%, 50%, 0.4)",
+			"id": "quality",
+			"label": "Quality Concepts",
+			"points": [
+				[15, -5],
+				[-15, 4],
+			],
+		},
+	]);
+	expect(graphNodes).toMatchObject([{
 		id: "Quality",
 		x: 15,
 		y: -5,
