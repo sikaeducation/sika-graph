@@ -39,14 +39,25 @@ export function runSimulation({
 			simulation, groups, options.simulation.hullPadding,
 		);
 		attractGroups(
-			simulation, groups, {
+			simulation,
+			groups,
+			{
 				alphaCutoff: options.simulation.alphaCutoff,
 				attraction: options.forces.charge.final,
 				cutoffTaperRate: options.forces.group.distance.rate,
 				cutoffDistance: options.forces.group.distance.cutoff,
 			},
 		);
-		shapeLinks(simulation, finalLinkForce);
+		shapeLinks(
+			simulation,
+			finalLinkForce,
+			{
+				alphaCutoff: options.simulation.alphaCutoff,
+				charge: options.forces.charge.final,
+				collision: options.forces.collision.final,
+				forceBoundaries: options.forces.boundaries as [number, number],
+			},
+		);
 	} while (count > 0);
 
 	return {
