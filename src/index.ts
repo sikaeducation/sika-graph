@@ -24,7 +24,6 @@ export function runSimulation({
 	groups: rawGroups,
 	currentFilter,
 }: SimulationParameters) {
-	console.log("c", currentFilter);
 	const { simulation, finalLinkForce } = createSimulation(
 		nodes, links, currentFilter,
 	);

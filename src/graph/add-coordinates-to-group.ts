@@ -5,7 +5,6 @@ export default function addCoordinatesToGroup(simulation: Simulation<Node, Link>
 	groups: RawGroup[]): Group[] {
 	const nodes = simulation.nodes();
 	const groupCenters = getCentroids(nodes);
-	// console.log("gc", nodes);
 
 	return groups
 		.map<Group>((group) => {

@@ -24,17 +24,12 @@ export function createSimulation(
 ) {
 	const simulation = initializeSimulation();
 
-	console.log(
-		"4l", links, nodes, currentFilter,
-	);
 	const normalizedLinks = getNormalizedLinks(
 		links, nodes, currentFilter,
 	);
-	console.log("5l", normalizedLinks);
 	const normalizedNodes = getNormalizedNodes(normalizedLinks, nodes);
 	const { initialLinkForce, finalLinkForce } = createLinkForces(normalizedLinks, normalizedNodes);
 
-	console.log("n1", normalizedNodes);
 
 	simulation
 		.nodes(normalizedNodes)
@@ -42,7 +37,6 @@ export function createSimulation(
 		.force("link", initialLinkForce);
 
 	// Casting to include coordinates from simulation
-	console.log("n2", simulation.nodes());
 	return {
 		simulation: simulation as Simulation<Node, Link>,
 		finalLinkForce,
@@ -74,9 +68,6 @@ function getNormalizedLinks(
 }
 
 function getNormalizedNodes(normalizedLinks: RawLink[], nodes: RawNode[]) {
-	console.log("n0", nodes);
-	console.log("l0", normalizedLinks);
-
 	const linkedNodeIds = normalizedLinks
 		.flatMap(({ source, target }) => {
 			return ([
@@ -85,20 +76,12 @@ function getNormalizedNodes(normalizedLinks: RawLink[], nodes: RawNode[]) {
 			]);
 		});
 
-	console.log("l0.25", linkedNodeIds);
-	let nodes2 = uniq(linkedNodeIds);
-	console.log("n0.3", nodes2);
-
-	let nodes3 = nodes2.map<RawNode>((nodeId) => {
-		console.log("i", nodeId);
-
-		const found = nodes
-			.find(({ id }) => id === nodeId) || nodes[0];
-		console.log("f", found);
-		return found;
-	});
-	console.log("n0.5", nodes3);
-	return nodes3;
+	return uniq(linkedNodeIds)
+		.map<RawNode>((nodeId) => {
+			const found = nodes
+				.find(({ id }) => id === nodeId) || nodes[0];
+			return found;
+		});
 }
 
 function initializeSimulation() {
