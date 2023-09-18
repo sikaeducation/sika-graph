@@ -7,7 +7,7 @@
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"strict": true,
-		"module": "commonjs",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"outDir": "dist",
