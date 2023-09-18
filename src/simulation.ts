@@ -1,10 +1,11 @@
+import { cloneDeep, uniq } from "lodash";
 import {
 	forceSimulation, forceManyBody, forceX, forceY, forceCollide, Simulation,
 } from "d3";
 import createLinkForces from "./forces/links";
 import { Node, RawLink, Link, RawNode } from "./types";
-import { deepClone, getUnique } from "./math/sets";
 import options from "./options";
+import { log } from "console";
 const {
 	forces: {
 		positional: positionalForce,
@@ -18,24 +19,30 @@ const {
 } = options;
 
 
-export function getSimulation(
-	nodes: RawNode[], links: RawLink[], currentFilter = "",
+export function createSimulation(
+	nodes: RawNode[], links: RawLink[], currentFilter = "all",
 ) {
 	const simulation = initializeSimulation();
 
+	console.log(
+		"4l", links, nodes, currentFilter,
+	);
 	const normalizedLinks = getNormalizedLinks(
 		links, nodes, currentFilter,
 	);
+	console.log("5l", normalizedLinks);
 	const normalizedNodes = getNormalizedNodes(normalizedLinks, nodes);
 	const { initialLinkForce, finalLinkForce } = createLinkForces(normalizedLinks, normalizedNodes);
 
+	console.log("n1", normalizedNodes);
+
 	simulation
 		.nodes(normalizedNodes)
-		.force("link", initialLinkForce)
-		.stop();
-	simulation.alpha(1);
+		.stop()
+		.force("link", initialLinkForce);
 
 	// Casting to include coordinates from simulation
+	console.log("n2", simulation.nodes());
 	return {
 		simulation: simulation as Simulation<Node, Link>,
 		finalLinkForce,
@@ -45,15 +52,19 @@ export function getSimulation(
 function getNormalizedLinks(
 	links: RawLink[], nodes: RawNode[], currentFilter = "",
 ) {
+	log(
+		"3n0", nodes, currentFilter,
+	);
 	const currentNodeIds = nodes
 		.filter((node) => (
 			currentFilter === "all"
 			|| node.group === currentFilter
 		)).map(({ id }) => id);
+	log("3n", currentNodeIds);
 
 	return currentFilter === "all"
-		? deepClone<RawLink[]>(links)
-		: deepClone<RawLink[]>(links)
+		? cloneDeep(links)
+		: cloneDeep(links)
 			.filter(({ source, target }) => {
 				return [
 					source,
@@ -63,6 +74,9 @@ function getNormalizedLinks(
 }
 
 function getNormalizedNodes(normalizedLinks: RawLink[], nodes: RawNode[]) {
+	console.log("n0", nodes);
+	console.log("l0", normalizedLinks);
+
 	const linkedNodeIds = normalizedLinks
 		.flatMap(({ source, target }) => {
 			return ([
@@ -71,9 +85,20 @@ function getNormalizedNodes(normalizedLinks: RawLink[], nodes: RawNode[]) {
 			]);
 		});
 
-	return getUnique(linkedNodeIds)
-		.map((nodeId) => nodes
-			.find(({ id }) => id === nodeId) || nodes[0]);
+	console.log("l0.25", linkedNodeIds);
+	let nodes2 = uniq(linkedNodeIds);
+	console.log("n0.3", nodes2);
+
+	let nodes3 = nodes2.map<RawNode>((nodeId) => {
+		console.log("i", nodeId);
+
+		const found = nodes
+			.find(({ id }) => id === nodeId) || nodes[0];
+		console.log("f", found);
+		return found;
+	});
+	console.log("n0.5", nodes3);
+	return nodes3;
 }
 
 function initializeSimulation() {

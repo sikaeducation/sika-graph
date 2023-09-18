@@ -4,7 +4,7 @@ import constrainNodes from "./graph/constrain-nodes";
 import attractGroups from "./forces/attract-groups";
 import shapeLinks from "./forces/shape-links";
 import options from "./options";
-import { getSimulation } from "./simulation";
+import { createSimulation } from "./simulation";
 const {
 	simulation: {
 		tickCount,
@@ -18,18 +18,19 @@ type SimulationParameters = {
 	currentFilter: string;
 }
 
-export default function runSimulation({
+export function runSimulation({
 	nodes,
 	links,
 	groups: rawGroups,
 	currentFilter,
 }: SimulationParameters) {
-	const { simulation, finalLinkForce } = getSimulation(
+	console.log("c", currentFilter);
+	const { simulation, finalLinkForce } = createSimulation(
 		nodes, links, currentFilter,
 	);
 
 	let count = tickCount;
-	let groups = addCoordinatesToGroup(simulation, rawGroups);
+	let groups: ReturnType<typeof addCoordinatesToGroup>;
 
 	do {
 		simulation.tick();
