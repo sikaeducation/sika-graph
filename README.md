@@ -2,6 +2,12 @@
 
 Given nodes, links, groups, and an optional filter, return the plottable graph data for a Sika Graph.
 
+## Installation
+
+```bash
+npm i @sikaeducation/sika-graph
+```
+
 ## Usage
 
 ```typescript
@@ -86,3 +92,7 @@ const { simulation, groups } = runSimulation({ nodes, links, groups, currentFilt
 * `npm run build`
 * `npm test`
 * `npm run lint`
+
+## Publishing
+
+Increment the version with `npm version patch|minor|major`, push to GitHub, automatically deploys to npm.

@@ -1,5 +1,5 @@
 import { it, expect } from "vitest";
-import { runSimulation } from "../src/index";
+import { runSimulation } from "./index";
 
 it("runs a simulation with 2 linked nodes", () => {
 	const nodes = [{
@@ -29,6 +29,7 @@ it("runs a simulation with 2 linked nodes", () => {
 		nodes: graphNodes,
 		groups: graphGroups,
 	} = runSimulation({ nodes, links, groups, currentFilter });
+
 	expect(graphGroups).toMatchObject([
 		{
 			"active": true,
@@ -43,6 +44,7 @@ it("runs a simulation with 2 linked nodes", () => {
 			],
 		},
 	]);
+
 	expect(graphNodes).toMatchObject([{
 		id: "Quality",
 		x: 15,
