@@ -1,9 +1,7 @@
 import { line, curveCatmullRomClosed, polygonHull } from "d3";
 import { CoordinatePair, Vector } from "../types";
 
-const hullPadding = 5;
-
-export default function getSmoothHull(rawPoints: CoordinatePair[]) {
+export default function getSmoothHull(rawPoints: CoordinatePair[], hullPadding: number) {
 	const points = getHullPoints(rawPoints);
 	const pointCount = points?.length || 0;
 

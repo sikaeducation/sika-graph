@@ -5,7 +5,7 @@ import attractGroups from "./forces/attract-groups";
 import shapeLinks from "./forces/shape-links";
 import defaultOptions from "./options";
 import { createSimulation } from "./simulation";
-import { merge } from "lodash";
+import { defaultsDeep } from "lodash";
 
 type SimulationParameters = {
 	nodes: RawNode[];
@@ -22,25 +22,30 @@ export function runSimulation({
 	options: optionsOverrides = {},
 	currentFilter,
 }: SimulationParameters) {
-	const options = merge(defaultOptions, optionsOverrides);
-	const {
-		simulation: {
-			tickCount,
-		},
-	} = options;
-	const { simulation, finalLinkForce } = createSimulation(
-		nodes, links, currentFilter,
+	const options = defaultsDeep(defaultOptions, optionsOverrides) as typeof defaultOptions;
+	const { simulation, finalLinkForce } = createSimulation({
+		nodes, links, options, currentFilter,
+	});
+
+	let count = options.simulation.tickCount;
+	let groups = addCoordinatesToGroup(
+		simulation, rawGroups, options.simulation.hullPadding,
 	);
-
-	let count = tickCount;
-	let groups: ReturnType<typeof addCoordinatesToGroup>;
-
 	do {
 		simulation.tick();
 		count--;
-		constrainNodes(simulation);
-		groups = addCoordinatesToGroup(simulation, rawGroups);
-		attractGroups(simulation, groups);
+		constrainNodes(simulation, options.simulation.size);
+		groups = addCoordinatesToGroup(
+			simulation, groups, options.simulation.hullPadding,
+		);
+		attractGroups(
+			simulation, groups, {
+				alphaCutoff: options.simulation.alphaCutoff,
+				attraction: options.forces.charge.final,
+				cutoffTaperRate: options.forces.group.distance.rate,
+				cutoffDistance: options.forces.group.distance.cutoff,
+			},
+		);
 		shapeLinks(simulation, finalLinkForce);
 	} while (count > 0);
 

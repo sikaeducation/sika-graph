@@ -1,16 +1,14 @@
 import { Simulation } from "d3";
 import { Node, Link } from "../types";
 
-export default function constrainNodes(simulation: Simulation<Node, Link>): void {
-	const boundary = 60;
-
+export default function constrainNodes(simulation: Simulation<Node, Link>, size: number): void {
 	const nodes = simulation.nodes();
 	nodes.forEach((node) => {
 		node.x = clampToInteger(
-			node.x, -boundary, boundary,
+			node.x, -size, size,
 		);
 		node.y = clampToInteger(
-			node.y, -boundary, boundary,
+			node.y, -size, size,
 		);
 	});
 }

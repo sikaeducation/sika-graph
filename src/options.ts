@@ -1,7 +1,9 @@
 const options = {
 	simulation: {
 		tickCount: 300,
-		alphaCutoff: 0.1,
+		alphaCutoff: 0.3,
+		size: 60, // y/x/-y/-x
+		hullPadding: 5,
 	},
 	forces: {
 		positional: {
@@ -9,7 +11,7 @@ const options = {
 			y: 0,
 		},
 		charge: { // Attraction, -100 is repel, 100 is stacked
-			initial: -90,
+			initial: 1 - 0.5,
 			final: -30,
 		},
 		collision: {
@@ -18,12 +20,12 @@ const options = {
 		},
 		link: { // Nodes pushed together or pulled apart
 			distance: { // How far apart to target, ~30
-				initial: 300,
+				initial: 1,
 				final: 30,
 			},
-			strength: { // 0-1, how aggressive
-				initial: 0.2,
-				final: 0.5,
+			strength: { // 0-1, how aggressive, non-group link strength
+				initial: 0.0,
+				final: 0.1,
 			},
 		},
 		group: {
@@ -33,12 +35,12 @@ const options = {
 			},
 			link: { // Used for link force nodes pre alpha cutoff
 				strength: { // -1 - 1: Positive is attraction, negative is repulsion
-					initial: 0.9,
+					initial: 1,
 				},
 			},
 			distance: {
-				cutoff: 300, // Distance to ignore this force after
-				rate: 100, // Factor
+				cutoff: 27, // Distance to ignore this force after / Ignore ndoes closer than this
+				rate: 1.1, // Factor
 			},
 		},
 	},

@@ -35,6 +35,51 @@ const groups = [{
 	"foreground-color": "hsla(120, 50%, 50%, 0.4)",
 }];
 const options = {
+	simulation: {
+		tickCount: 300,
+		alphaCutoff: 0.1,
+		size: 60, // y/x/-y/-x
+		hullPadding: 5,
+	},
+	forces: {
+		positional: {
+			x: 0,
+			y: 0,
+		},
+		charge: { // Attraction, -100 is repel, 100 is stacked
+			initial: -90,
+			final: -30,
+		},
+		collision: {
+			initial: 30,
+			final: 0,
+		},
+		link: { // Nodes pushed together or pulled apart
+			distance: { // How far apart to target, ~30
+				initial: 300,
+				final: 30,
+			},
+			strength: { // 0-1, how aggressive
+				initial: 0.2,
+				final: 0.5,
+			},
+		},
+		group: {
+			charge: { // how attracted nodes are to group center, -1 is repulsion, 0 is no attraction, 1 is pinned to center
+				initial: 1,
+				final: 0.5,
+			},
+			link: { // Used for link force nodes pre alpha cutoff
+				strength: { // -1 - 1: Positive is attraction, negative is repulsion
+					initial: 0.9,
+				},
+			},
+			distance: {
+				cutoff: 300, // Distance to ignore this force after
+				rate: 100, // Factor
+			},
+		},
+	},
 };
 const currentFilter = "all";
 const { simulation, groups } = runSimulation({ nodes, links, groups, currentFilter });
@@ -47,6 +92,12 @@ const { simulation, groups } = runSimulation({ nodes, links, groups, currentFilt
 		"background-color": "hsla(120, 50%, 50%, 0.1)",
 		"center": [ 0, -0.5 ],
 		"foreground-color": "hsla(120, 50%, 50%, 0.4)",
+		"hull": `
+		M 29.36739427831727 -9.310218283495182
+		C 32.06128070550176,-0.3305968595468869,-26.673507851132783,17.289839707443477,-29.36739427831727,8.310218283495182
+		S 26.673507851132783,-18.289839707443477,29.36739427831727,-9.310218283495182
+		Z
+		`,
 		"id": "quality",
 		"label": "Quality Concepts",
 		"points": [

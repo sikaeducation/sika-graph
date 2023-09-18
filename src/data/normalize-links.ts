@@ -2,7 +2,7 @@ import { cloneDeep } from "lodash";
 import { RawLink, RawNode } from "../types";
 
 export default function getNormalizedLinks(
-	links: RawLink[], nodes: RawNode[], currentFilter = "",
+	links: RawLink[], nodes: RawNode[], currentFilter = "all",
 ) {
 	const currentNodeIds = nodes
 		.filter((node) => (

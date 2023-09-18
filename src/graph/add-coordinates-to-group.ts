@@ -1,14 +1,21 @@
 import { Simulation } from "d3";
 import { Node, Group, RawGroup, CoordinatePair, Coordinate, Link } from "../types";
+import getSmoothHull from "./hull";
 
-export default function addCoordinatesToGroup(simulation: Simulation<Node, Link>,
-	groups: RawGroup[]): Group[] {
+export default function addCoordinatesToGroup(
+	simulation: Simulation<Node, Link>,
+	groups: RawGroup[],
+	hullPadding: number,
+): Group[] {
 	const nodes = simulation.nodes();
 	const groupCenters = getCentroids(nodes);
 
 	return groups
 		.map<Group>((group) => {
 			const { id } = group;
+			const groupNodeCoordinates = nodes
+				.filter(({ group }) => group === id)
+				.map<CoordinatePair>(({ x, y }: Node) => ([x, y]));
 
 			return {
 				...group,
@@ -17,12 +24,8 @@ export default function addCoordinatesToGroup(simulation: Simulation<Node, Link>
 					groupCenters[id].x,
 					groupCenters[id].y,
 				],
-				points: nodes
-					.filter(({ group }) => group === id)
-					.map<CoordinatePair>(({ x, y }: Node) => ([
-						x,
-						y,
-					])),
+				hull: getSmoothHull(groupNodeCoordinates, hullPadding),
+				points: groupNodeCoordinates,
 			};
 		});
 }

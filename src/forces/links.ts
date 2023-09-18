@@ -3,36 +3,42 @@ import { HydratedLink, RawNode, RawLink } from "../types";
 
 type Values = {
 	linkDistance: number;
-	nonGrouplinkStrength: number;
+	nonGroupLinkStrength: number;
 	groupLinkStrength: number;
 }
 
-export default function createLinkForces(links: RawLink[], normalizedNodes: RawNode[]) {
+export default function createLinkForces(
+	links: RawLink[],
+	normalizedNodes: RawNode[],
+	options: {
+		initialLinkForce: {
+			linkDistance: number;
+			groupLinkStrength: number;
+			nonGroupLinkStrength: number;
+		},
+		finalLinkForce: {
+			linkDistance: number;
+			groupLinkStrength: number;
+			nonGroupLinkStrength: number;
+		},
+	},
+) {
 	const fullLinks = links.map<HydratedLink>((link) => ({
 		source: normalizedNodes.find((node) => node.id === link.source)!,
 		target: normalizedNodes.find((node) => node.id === link.target)!,
 	}));
 
-	const initialLinkForce = createLinkForce(fullLinks, {
-		linkDistance: 1,
-		groupLinkStrength: 1,
-		nonGrouplinkStrength: 0,
-	});
-
-	const finalLinkForce = createLinkForce(fullLinks, {
-		linkDistance: 30,
-		groupLinkStrength: 1,
-		nonGrouplinkStrength: 0.1,
-	});
-
-	return { initialLinkForce, finalLinkForce };
+	return {
+		initialLinkForce: createLinkForce(fullLinks, options.initialLinkForce),
+		finalLinkForce: createLinkForce(fullLinks, options.finalLinkForce),
+	};
 }
 
 
 function createLinkForce(links: HydratedLink[], {
 	linkDistance,
 	groupLinkStrength,
-	nonGrouplinkStrength,
+	nonGroupLinkStrength: nonGrouplinkStrength,
 }: Values) {
 	return forceLink<RawNode, HydratedLink>()
 		.id(({ id }) => id)

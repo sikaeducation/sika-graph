@@ -6,21 +6,48 @@ import { Node, Link, RawLink, RawNode } from "./types";
 import options from "./options";
 import normalizeLinks from "./data/normalize-links";
 import normalizeNodes from "./data/normalize-nodes";
-const {
-	forces: {
-		positional: positionalForce,
-		charge: {
-			initial: initialCharge,
-		},
-		collision: {
-			initial: initialCollision,
-		},
-	},
-} = options;
 
-export function createSimulation(
-	nodes: RawNode[], links: RawLink[], currentFilter = "all",
-) {
+type Options = typeof options
+
+export function createSimulation({
+	nodes,
+	links,
+	options,
+	currentFilter = "all",
+}: {
+	nodes: RawNode[];
+	links: RawLink[];
+	options: Options;
+	currentFilter: string;
+}) {
+	const {
+		forces: {
+			positional: positionalForce,
+			charge: {
+				initial: initialCharge,
+			},
+			collision: {
+				initial: initialCollision,
+			},
+			link: {
+				distance: {
+					initial: initialLinkDistance,
+					final: finalLinkDistance,
+				},
+				strength: {
+					initial: initialNonGroupLinkStrength,
+					final: finalNonGrouplinkStrength,
+				},
+			},
+			group: {
+				link: {
+					strength: {
+						initial: initialGroupLinkStrength,
+					},
+				},
+			},
+		},
+	} = options;
 	const simulation = forceSimulation<Node, Link>()
 		.force("x", forceX<RawNode>(positionalForce.x))
 		.force("y", forceY<RawNode>(positionalForce.y))
@@ -31,7 +58,22 @@ export function createSimulation(
 		links, nodes, currentFilter,
 	);
 	const normalizedNodes = normalizeNodes(nodes, normalizedLinks);
-	const { initialLinkForce, finalLinkForce } = createLinkForces(normalizedLinks, normalizedNodes);
+	const { initialLinkForce, finalLinkForce } = createLinkForces(
+		normalizedLinks,
+		normalizedNodes,
+		{
+			initialLinkForce: {
+				linkDistance: initialLinkDistance,
+				groupLinkStrength: initialGroupLinkStrength,
+				nonGroupLinkStrength: initialNonGroupLinkStrength,
+			},
+			finalLinkForce: {
+				linkDistance: finalLinkDistance,
+				groupLinkStrength: initialGroupLinkStrength,
+				nonGroupLinkStrength: finalNonGrouplinkStrength,
+			},
+		},
+	);
 
 	simulation
 		.nodes(normalizedNodes as Node[])
