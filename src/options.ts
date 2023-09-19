@@ -2,7 +2,7 @@ const options = {
 	simulation: {
 		tickCount: 300,
 		alphaCutoff: 0.3,
-		size: 60, // y/x/-y/-x
+		size: 1000, // y/x/-y/-x
 		hullPadding: 5,
 	},
 	forces: {
@@ -10,9 +10,9 @@ const options = {
 			x: 0,
 			y: 0,
 		},
-		charge: { // Attraction, -100 is repel, 100 is stacked
-			initial: 1 - 0.5,
-			final: -80,
+		charge: { // Attraction, -1 is repel, 1 is stacked
+			initial: 0,
+			final: -0.5,
 		},
 		collision: {
 			initial: 30,
@@ -30,7 +30,7 @@ const options = {
 		},
 		boundaries: [1, 1000],
 		group: {
-			charge: { // how attracted nodes are to group center, -1 is repulsion, 0 is no attraction, 1 is pinned to center
+			charge: { // how attracted nodes are to group center, -1 is repulsion, 0 is no attraction, 1 is pinned to center.
 				initial: 1,
 				final: 0.5,
 			},

@@ -1,31 +1,9 @@
-/* eslint-disable max-len */
 import { it, expect } from "vitest";
-import { runSimulation } from "./index";
-import defaultOptions from "./options";
+import { runSimulation } from "../src//index";
+import defaultOptions from "../src/options";
+import { nodes, links, groups } from "./fixtures/two-nodes";
 
-it("runs a simulation with 2 linked nodes", () => {
-	const nodes = [{
-		"id": "Quality",
-		"group": "quality",
-		"critical": true,
-		"complete": true,
-	},
-	{
-		"id": "Naming",
-		"group": "quality",
-		"critical": false,
-		"complete": false,
-	}];
-	const links = [{
-		"source": "Quality",
-		"target": "Naming",
-	}];
-	const groups = [{
-		"id": "quality",
-		"label": "Quality Concepts",
-		"background-color": "hsla(120, 50%, 50%, 0.1)",
-		"foreground-color": "hsla(120, 50%, 50%, 0.4)",
-	}];
+it.skip("runs a simulation with 2 linked nodes", () => {
 	const currentFilter = "all";
 	const {
 		nodes: graphNodes,

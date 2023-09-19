@@ -34,7 +34,9 @@ export function runSimulation({
 	do {
 		simulation.tick();
 		count--;
-		constrainNodes(simulation, options.simulation.size);
+		if (count < 5) {
+			constrainNodes(simulation, options.simulation.size);
+		}
 		groups = addCoordinatesToGroup(
 			simulation, groups, options.simulation.hullPadding,
 		);
