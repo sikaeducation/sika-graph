@@ -11,7 +11,6 @@ export default function constrainNodes(simulation: Simulation<Node, Link>, size:
 			node.y, -size, size,
 		);
 	});
-	console.log(nodes.map((node) => `${node.x},${node.y}`));
 }
 
 export function clampToInteger(

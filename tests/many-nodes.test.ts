@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { it, expect } from "vitest";
 import { runSimulation } from "../src/index";
 import defaultOptions from "../src/options";
@@ -16,14 +15,15 @@ it("runs a simulation with many linked nodes", () => {
 		currentFilter,
 	});
 
-	expect(false).toBe(true);
-	// expect(graphNodes).toMatchObject([{
-	// 	id: "Quality",
-	// 	x: -16,
-	// 	y: 4,
-	// }, {
-	// 	id: "Naming",
-	// 	x: 16,
-	// 	y: -3,
-	// }]);
+	expect(graphNodes).toEqual(expect.arrayContaining([
+		expect.objectContaining({
+			id: "Quality",
+			x: -12,
+			y: 23,
+		}), expect.objectContaining({
+			id: "Naming",
+			x: -6,
+			y: 20.25,
+		}),
+	]));
 });

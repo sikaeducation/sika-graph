@@ -3,7 +3,7 @@ import { runSimulation } from "../src//index";
 import defaultOptions from "../src/options";
 import { nodes, links, groups } from "./fixtures/two-nodes";
 
-it.skip("runs a simulation with 2 linked nodes", () => {
+it("runs a simulation with 2 linked nodes", () => {
 	const currentFilter = "all";
 	const {
 		nodes: graphNodes,
@@ -22,26 +22,26 @@ it.skip("runs a simulation with 2 linked nodes", () => {
 			"background-color": "hsla(120, 50%, 50%, 0.1)",
 			"center": [0, 0.5],
 			"foreground-color": "hsla(120, 50%, 50%, 0.4)",
-			"hull": `M -30.65350026094393 7.2054531820814836
-C -32.65690849974486,-1.952984481008472,28.650092022143003,-15.36389084517144,30.65350026094393,-6.2054531820814836
-S -28.650092022143003,16.36389084517144,-30.65350026094393,7.2054531820814836
+			"hull": `M -28.552137502179978 7.638034375544994
+C -30.825908986895598,-1.4570515633174912,26.278366017464357,-15.73312031440748,28.552137502179978,-6.638034375544994
+S -26.278366017464357,16.73312031440748,-28.552137502179978,7.638034375544994
 Z`,
 			"id": "quality",
 			"label": "Quality Concepts",
 			"points": [
-				[-16, 4],
-				[16, -3],
+				[-14, 4],
+				[14, -3],
 			],
 		},
 	]);
 
 	expect(graphNodes).toMatchObject([{
 		id: "Quality",
-		x: -16,
+		x: -14,
 		y: 4,
 	}, {
 		id: "Naming",
-		x: 16,
+		x: 14,
 		y: -3,
 	}]);
 });
