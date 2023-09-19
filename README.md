@@ -1,5 +1,7 @@
 # Sika Graph
 
+[![Test, build, and publish](https://github.com/sikaeducation/sika-graph/actions/workflows/main.yml/badge.svg)](https://github.com/sikaeducation/sika-graph/actions/workflows/main.yml)
+
 Given nodes, links, groups, an optional options object, and an optional filter, return the plottable graph data for a Sika Graph. The filter needs to be a part of this (instead of the data being passed in) to prevent the graph thrashing when all of the plot points for the data change.
 
 ## Installation
