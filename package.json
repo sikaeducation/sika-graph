@@ -1,6 +1,6 @@
 {
 	"name": "@sikaeducation/sika-graph",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"dependencies": {
 		"d3": "^7.8.5",
 		"lodash": "^4.17.21"
