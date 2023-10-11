@@ -28,12 +28,14 @@ export function runSimulation({
 	});
 
 	let count = options.simulation.tickCount;
+	simulation.tick();
 	let groups = addCoordinatesToGroup(
 		simulation, rawGroups, options.simulation.hullPadding,
 	);
+
 	do {
 		simulation.tick();
-		count--;
+
 		constrainNodes(simulation, options.simulation.size);
 		groups = addCoordinatesToGroup(
 			simulation, groups, options.simulation.hullPadding,
@@ -58,6 +60,8 @@ export function runSimulation({
 				forceBoundaries: options.forces.boundaries as [number, number],
 			},
 		);
+
+		count--;
 	} while (count > 0);
 
 	return {
