@@ -1,9 +1,7 @@
 name: Test, build, and publish
-
 on:
   push:
-    tags:
-      - v*
+    tags: [v*]
 env:
   FORCE_COLOR: 1
 permissions: write-all
@@ -33,7 +31,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: https://registry.npmjs.org
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -42,3 +40,16 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Publish release
+        uses: elgohr/Github-Release-Action@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          title: v${{ github.ref }}
