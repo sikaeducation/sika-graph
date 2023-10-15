@@ -1,32 +1,29 @@
 {
-	"name": "@sikaeducation/sika-graph",
-	"version": "1.1.0",
-	"dependencies": {
-		"d3": "^7.8.5",
-		"lodash": "^4.17.21"
-	},
-	"scripts": {
-		"build": "tsc",
-		"lint": "eslint --fix .",
-		"test": "vitest"
-	},
-	"main": "dist/src/index.js",
-	"types": "dist/src/index.d.ts",
-	"devDependencies": {
-		"@sikaeducation/eslint-config": "^2.0.18",
-		"@types/d3": "^7.4.0",
-		"@types/lodash": "^4.14.198",
-		"@types/node": "^16.18.38",
-		"@typescript-eslint/eslint-plugin": "^6.7.0",
-		"@typescript-eslint/parser": "^6.7.0",
-		"eslint": "^8.49.0",
-		"eslint-import-resolver-typescript": "^3.6.0",
-		"eslint-plugin-import": "^2.28.1",
-		"eslint-plugin-jest": "^27.4.0",
-		"eslint-plugin-jest-extended": "^2.0.0",
-		"eslint-plugin-jest-formatting": "^3.1.0",
-		"jest-extended": "^4.0.1",
-		"typescript": "^4.9.5",
-		"vitest": "^0.34.4"
-	}
+  "name": "@sikaeducation/sika-graph",
+  "version": "1.1.0",
+  "dependencies": {
+    "d3": "^7.8.5",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --report-unused-disable-directives --ignore-path .gitignore --fix . && prettier . --write",
+    "test": "vitest",
+    "update:sika": "npm i @sikaeducation/eslint-config@latest"
+  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.5.1",
+    "@sikaeducation/eslint-config": "^3.1.1",
+    "@types/d3": "^7.4.0",
+    "@types/lodash": "^4.14.198",
+    "@types/node": "^16.18.38",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "prettier": "^3.0.3",
+    "typescript": "^4.9.5",
+    "vitest": "^0.34.4"
+  }
 }

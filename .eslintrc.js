@@ -1,7 +1,9 @@
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
-	overrides: [
-		require("@sikaeducation/eslint-config/ts"),
-		require("@sikaeducation/eslint-config/jest-ts"),
-		require("@sikaeducation/eslint-config/formatting"),
-	],
+  extends: [
+    "@sikaeducation",
+    "@sikaeducation/eslint-config/src/configs/vitest",
+  ],
+  parserOptions: { tsconfigRootDir: __dirname },
 };

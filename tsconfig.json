@@ -1,24 +1,17 @@
 {
-	"compilerOptions": {
-		"target": "esnext",
-		"lib": [
-			"esnext"
-		],
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"strict": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"outDir": "dist",
-		"sourceMap": true,
-		"declaration": true
-	},
-	"include": [
-		"src/**/*.ts",
-		"tests/**/*.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules"]
 }
