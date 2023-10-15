@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": ["esnext"],
-    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "strict": true,
-    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["esnext"],
+    "module": "CommonJS",
     "moduleResolution": "node",
+    "noEmit": true,
     "resolveJsonModule": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "declaration": true
-  },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "vite.config.ts"],
-  "exclude": ["node_modules"]
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  }
 }
