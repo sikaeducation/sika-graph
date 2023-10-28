@@ -161,9 +161,9 @@ const { simulation, groups } = runSimulation({
 ## Scripts
 
 - `npm run build`
-- `npm test`
 - `npm run lint`
+- `npm test`, `npm test:watch`
 
-## Publishing
+## Deployment
 
 Increment the version with `npm version patch|minor|major`, push to GitHub, automatically deploys to npm.

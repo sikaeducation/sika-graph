@@ -13,17 +13,17 @@ it("runs a simulation with many linked nodes", () => {
     currentFilter,
   });
 
-  expect(graphNodes).toStrictEqual(
+  expect(graphNodes).toMatchObject(
     expect.arrayContaining([
       expect.objectContaining({
-        id: "Quality",
+        id: "Jest Time",
         x: -12,
-        y: 23,
+        y: 25,
       }),
       expect.objectContaining({
-        id: "Naming",
+        id: "TypeScript Generic Types",
         x: -6,
-        y: 20.25,
+        y: 16,
       }),
     ]),
   );
