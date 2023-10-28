@@ -4,6 +4,8 @@
 
 Given nodes, links, groups, an optional options object, and an optional filter, return the plottable graph data for a Sika Graph. The filter needs to be a part of this (instead of the data being passed in) to prevent the graph thrashing when all of the plot points for the data change.
 
+Deploys to npm as [@sikaeducation/sika-graph](https://www.npmjs.com/package/@sikaeducation/sika-graph).
+
 ## Installation
 
 ```bash
@@ -166,4 +168,4 @@ const { simulation, groups } = runSimulation({
 
 ## Deployment
 
-Increment the version with `npm version patch|minor|major`, push to GitHub, automatically deploys to npm.
+Set `NPM_TOKEN` on the [secrets page](https://github.com/sikaeducation/sika-graph/settings/secrets/actions). Generate `NPM_TOKEN` on the [Sika npm account](https://www.npmjs.com/settings/sikaeducation/tokens). Increment the version with `npm version patch|minor|major` and push to deploy.
