@@ -1,6 +1,6 @@
 {
   "name": "@sikaeducation/sika-graph",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Graph algorithm for generating curriculum navigation coordinates",
   "repository": {
     "type": "git",
